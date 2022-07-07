@@ -4,7 +4,7 @@
 
 実装言語はc++です．
 開発は，Visual Studio 2019で行いました．
-描画ライブラリとして，DXライブラリ（https://dxlib.xsrv.jp/index.html）を用いました．
+描画ライブラリとして，DXライブラリを用いました．https://dxlib.xsrv.jp/index.html
 
 
 exeファイルから実行結果を見れます．

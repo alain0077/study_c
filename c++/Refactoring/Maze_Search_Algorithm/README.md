@@ -10,7 +10,7 @@ http://objectclub.jp/technicaldoc/refactoring/refact-what
 
 ## 行ったリファクタリングについて
 ### 一覧
-![問題点１](https://github.com/alain0077/study_c/tree/master/c++/Refactoring/Maze_Search_Algorithm#%E5%95%8F%E9%A1%8C%E7%82%B9)
+[問題点１](https://github.com/alain0077/study_c/tree/master/c++/Refactoring/Maze_Search_Algorithm#%E5%95%8F%E9%A1%8C%E7%82%B9)
 
 ### 問題点１
 Main関数がマップの生成と各探索手法を行うクラスの呼び出し・管理をしていたため，読みにくくなっていた．

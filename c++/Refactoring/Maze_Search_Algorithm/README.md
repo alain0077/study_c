@@ -14,6 +14,7 @@ http://objectclub.jp/technicaldoc/refactoring/refact-what
 Main関数がマップの生成と各探索手法を行うクラスの呼び出し・管理をしていたため，読みにくくなっていた．
 また，迷路探索を行うときに同じWhile文が手法の数だけ出来てしまうような，コードクローンが見られたためこの改善を行いました．
 青で囲っている部分がコードクローンです．
+
 <img src="./img/dup.png" width="350">
 
 ### 改善方法

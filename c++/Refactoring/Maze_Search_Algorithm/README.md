@@ -2,7 +2,15 @@
 
 ##リファクタリングの参考にしたサイト
 
+<<<<<<< HEAD
 https://refactoring.com/catalog/
+=======
+リファクタリングの参考にしたサイト
+
+https://refactoring.com/catalog/
+
+http://objectclub.jp/technicaldoc/refactoring/refact-what
+>>>>>>> fc79ac11567611988e09a1923bd2d8482242ac37
 
 http://objectclub.jp/technicaldoc/refactoring/refact-what
 
@@ -32,5 +40,10 @@ http://objectclub.jp/technicaldoc/refactoring/refact-what
 ####変更前のクラス図
 <img src="./img/class1.png" width="250">
 
+<<<<<<< HEAD
 ####変更後のクラス図
 <img src="./img/class2.png" width="250">
+=======
+変更後のクラス図
+![クラス図2](./img/class2.png)
+>>>>>>> fc79ac11567611988e09a1923bd2d8482242ac37

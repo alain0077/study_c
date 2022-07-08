@@ -14,23 +14,23 @@ struct Bfs_Coor
 class BFS : public Abstract
 {
 public:
-	BFS(std::vector<std::vector<int>> map, int start_x, int start_y, int end_x, int end_y);
+	BFS(Map_Info map);
 	~BFS() = default;
 	void update() override;
 	void draw() const override;
 	void finalize() override;
 
+private:
 	// breadth-first search
 	void bfs();
 
-private:
-	// queue for bfs
-	std::queue<Bfs_Coor> q;
+	int _depth;
 
-	int depth;
+	// queue for bfs
+	std::queue<Bfs_Coor> _q;
 
 	// map for bfs
-	std::vector<std::vector<int>> bfs_map;
+	std::vector<std::vector<int>> _bfs_map;
 
 	// jubge whether it's load
 	bool judge_road(int) const;

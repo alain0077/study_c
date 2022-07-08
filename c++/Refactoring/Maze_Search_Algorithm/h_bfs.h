@@ -18,7 +18,7 @@ struct H_bfs_Coor
 class H_bfs : public Abstract
 {
 public:
-	H_bfs(std::vector<std::vector<int>> _map, int start_x, int start_y, int end_x, int end_y);
+	H_bfs(Map_Info map);
 	~H_bfs() = default;
 	void update() override;
 	void draw() const override;
@@ -28,10 +28,10 @@ private:
 	// best first search
 	void bfs();
 
-	int cost;
+	int _cost;
 
 	//list for bfs saved branch
-	std::list<H_bfs_Coor> branch;
+	std::list<H_bfs_Coor> _branch;
 
 	// sort branch about man_d
 	void branch_sort();

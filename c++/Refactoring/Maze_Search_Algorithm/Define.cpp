@@ -1,6 +1,6 @@
 #include "Define.h"
 
-const int   Define::WIN_W = 700;		//ウィンドウサイズ横
-const int   Define::WIN_H = 400;		//ウィンドウサイズ縦
+const int Define::WIN_W = 700;		//繧ｦ繧｣繝ｳ繝峨え繧ｵ繧､繧ｺ讓ｪ
+const int Define::WIN_H = 400;		//繧ｦ繧｣繝ｳ繝峨え繧ｵ繧､繧ｺ邵ｦ
 
-const int Define::MAP_SIZE = 23;	//迷路のサイズ
+const int Define::MAP_SIZE = 23;	//繝槭ャ繝励�ｮ繧ｵ繧､繧ｺ

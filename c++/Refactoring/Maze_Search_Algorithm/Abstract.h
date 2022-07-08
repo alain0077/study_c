@@ -3,11 +3,12 @@
 #include <DxLib.h>
 #include <vector>
 #include "Define.h"
+#include "Map.h"
 
 class Abstract
 {
 public:
-	Abstract(std::vector<std::vector<int>> _map, int start_x, int start_y, int end_x, int end_y);
+	Abstract(Map_Info map);
 	~Abstract() = default;
 	bool loop();
 	virtual void update() = 0;
@@ -25,26 +26,17 @@ public:
 
 protected:
 	// map
-	std::vector<std::vector<int>> _map;
-
-	// start coordinates
-	int start_x;
-	int start_y;
-
-	// end coordinates
-	int end_x;
-	int end_y;
+	Map_Info _map;
 
 	// searching coordinates
-	int x;
-	int y;
+	Coor _coor;
 
 	// searching direction
-	int now_dict;
+	int _now_dict;
 
 	// end flag
-	bool end_flag;
+	bool _end_flag;
 
 	// required turn for saerch
-	int turn;
+	int _turn;
 };

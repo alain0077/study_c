@@ -2,10 +2,11 @@
 
 using namespace std;
 
-BFS::BFS(std::vector<std::vector<int>> map, int start_x, int start_y, int end_x, int end_y) : Abstract(map, start_x, start_y, end_x, end_y),
-bfs_map(map), depth(0)
+BFS::BFS(Map_Info map) : Abstract(map),
+_depth(0)
 {
-	q.push({ start_x, start_y, Define::eMapType::eMapTypeNum });
+	_bfs_map = map.map;
+	_q.push({ map.start.x, map.start.y, Define::eMapType::eMapTypeNum });
 }
 
 void BFS::update()
@@ -17,10 +18,12 @@ void BFS::finalize()
 {
 	ClearDrawScreen();
 
-	int goal_depth = depth;
+	int goal_depth = _depth;
 	int dict = 0;
+	Coor start = _map.start, end = _map.end;
+	vector<vector <int>> map = _map.map;
 
-	Bfs_Coor goal = { end_x, end_y, goal_depth };
+	Bfs_Coor goal = { end.x, end.y, goal_depth };
 
 	queue<Bfs_Coor> g;
 
@@ -32,13 +35,13 @@ void BFS::finalize()
 
 		dict++;
 
-		if (dict >= dict_num)
+		if (dict >= eDict::dict_num)
 			dict = 0;
 
 		switch (dict)
 		{
 		case right:
-			if (bfs_map.at(goal.x + 1).at(goal.y) == goal_depth) {
+			if (_bfs_map.at(goal.x + 1).at(goal.y) == goal_depth) {
 				goal.x++;
 				g.push(goal);
 				goal_depth--;
@@ -47,7 +50,7 @@ void BFS::finalize()
 			break;
 
 		case up:
-			if (bfs_map.at(goal.x).at(goal.y - 1) == goal_depth) {
+			if (_bfs_map.at(goal.x).at(goal.y - 1) == goal_depth) {
 				goal.y--;
 				g.push(goal);
 				goal_depth--;
@@ -56,7 +59,7 @@ void BFS::finalize()
 			break;
 
 		case left:
-			if (bfs_map.at(goal.x - 1).at(goal.y) == goal_depth) {
+			if (_bfs_map.at(goal.x - 1).at(goal.y) == goal_depth) {
 				goal.x--;
 				g.push(goal);
 				goal_depth--;
@@ -65,7 +68,7 @@ void BFS::finalize()
 			break;
 
 		case down:
-			if (bfs_map.at(goal.x).at(goal.y + 1) == goal_depth) {
+			if (_bfs_map.at(goal.x).at(goal.y + 1) == goal_depth) {
 				goal.y++;
 				g.push(goal);
 				goal_depth--;
@@ -78,14 +81,14 @@ void BFS::finalize()
 	for (int i = 0; i < Define::MAP_SIZE; i++) {
 		for (int j = 0; j < Define::MAP_SIZE; j++)
 		{
-			if (_map.at(i).at(j) == Define::eMapType::wall) {
+			if (map.at(i).at(j) == Define::eMapType::wall) {
 				DrawString(20 + 20 * i, 20 + 20 * j, "Å°", GetColor(255, 255, 255));
 			}
 			else {
-				if (i == start_x && j == start_y) {
+				if (i == start.x && j == start.y) {
 					DrawString(20 + 20 * i, 20 + 20 * j, "Å°", GetColor(255, 0, 0));
 				}
-				else if (i == end_x && j == end_y) {
+				else if (i == end.x && j == end.y) {
 					DrawString(20 + 20 * i, 20 + 20 * j, "Å°", GetColor(0, 0, 255));
 				}
 				else {
@@ -101,7 +104,7 @@ void BFS::finalize()
 		g.pop();
 	}
 
-	DrawFormatString(500, 480, GetColor(255, 255, 255), "%d", turn);
+	DrawFormatString(500, 480, GetColor(255, 255, 255), "%d", _turn);
 	DrawString(500, 500, "please hit key", GetColor(255, 255, 255));
 
 	ScreenFlip();
@@ -111,72 +114,73 @@ void BFS::finalize()
 
 void BFS::bfs()
 {
-	x = q.front().x;
-	y = q.front().y;
-	depth = q.front().depth;
+	_coor.x = _q.front().x, _coor.y = _q.front().y;
+	vector<vector <int>> map = _map.map;
 
-	q.pop();
+	_depth = _q.front().depth;
 
-	turn++;
+	_q.pop();
+
+	_turn++;
 
 	for (int i = 0; i < eDict::dict_num; i++) {
 		if (judge_road(i)) {
 			switch (i)
 			{
 			case eDict::right:
-				q.push({ x + 1, y, depth + 1 });
-				bfs_map.at(x + 1).at(y) = depth + 1;
+				_q.push({ _coor.x + 1, _coor.y, _depth + 1 });
+				_bfs_map.at(_coor.x + 1).at(_coor.y) = _depth + 1;
 
-				if (_map.at(x + 1).at(y) == Define::eMapType::goal) {
-					x++;
-					depth++;
-					turn++;
-					end_flag = true;
+				if (map.at(_coor.x + 1).at(_coor.y) == Define::eMapType::goal) {
+					_coor.x++;
+					_depth++;
+					_turn++;
+					_end_flag = true;
 				}
 
 				break;
 
 			case eDict::up:
-				q.push({ x, y - 1, depth + 1 });
-				bfs_map.at(x).at(y - 1) = depth + 1;
+				_q.push({ _coor.x, _coor.y - 1, _depth + 1 });
+				_bfs_map.at(_coor.x).at(_coor.y - 1) = _depth + 1;
 
-				if (_map.at(x).at(y - 1) == Define::eMapType::goal) {
-					y--;
-					depth++;
-					turn++;
-					end_flag = true;
+				if (map.at(_coor.x).at(_coor.y - 1) == Define::eMapType::goal) {
+					_coor.y--;
+					_depth++;
+					_turn++;
+					_end_flag = true;
 				}
 
 				break;
 
 			case eDict::left:
-				q.push({ x - 1, y, depth + 1 });
-				bfs_map.at(x - 1).at(y) = depth + 1;
+				_q.push({ _coor.x - 1, _coor.y, _depth + 1 });
+				_bfs_map.at(_coor.x - 1).at(_coor.y) = _depth + 1;
 
-				if (_map.at(x - 1).at(y) == Define::eMapType::goal) {
-					x--;
-					depth++;
-					turn++;
-					end_flag = true;
+				if (map.at(_coor.x - 1).at(_coor.y) == Define::eMapType::goal) {
+					_coor.x--;
+					_depth++;
+					_turn++;
+					_end_flag = true;
 				}
 
 				break;
 
 			case eDict::down:
-				q.push({ x, y + 1, depth + 1 });
-				bfs_map.at(x).at(y + 1) = depth + 1;
+				_q.push({ _coor.x, _coor.y + 1, _depth + 1 });
+				_bfs_map.at(_coor.x).at(_coor.y + 1) = _depth + 1;
 
-				if (_map.at(x).at(y + 1) == Define::eMapType::goal) {
-					y++;
-					depth++;
-					turn++;
-					end_flag = true;
+				if (map.at(_coor.x).at(_coor.y + 1) == Define::eMapType::goal) {
+					_coor.y++;
+					_depth++;
+					_turn++;
+					_end_flag = true;
 				}
 
 				break;
 			}
 
-			if (end_flag) {
+			if (_end_flag) {
 				break;
 			}
 		}
@@ -185,22 +189,24 @@ void BFS::bfs()
 
 bool BFS::judge_road(int dict) const
 {
+	int x = _coor.x, y = _coor.y;
+
 	switch (dict)
 	{
 	case eDict::up:
-		if (bfs_map.at(x).at(y - 1) == Define::eMapType::road || _map.at(x).at(y - 1) == Define::eMapType::goal)
+		if (_bfs_map.at(x).at(y - 1) == Define::eMapType::road || _map.map.at(x).at(y - 1) == Define::eMapType::goal)
 			return true;
 		break;
 	case eDict::down:
-		if (bfs_map.at(x).at(y + 1) == Define::eMapType::road || _map.at(x).at(y + 1) == Define::eMapType::goal)
+		if (_bfs_map.at(x).at(y + 1) == Define::eMapType::road || _map.map.at(x).at(y + 1) == Define::eMapType::goal)
 			return true;
 		break;
 	case eDict::right:
-		if (bfs_map.at(x + 1).at(y) == Define::eMapType::road || _map.at(x + 1).at(y) == Define::eMapType::goal)
+		if (_bfs_map.at(x + 1).at(y) == Define::eMapType::road || _map.map.at(x + 1).at(y) == Define::eMapType::goal)
 			return true;
 		break;
 	case eDict::left:
-		if (bfs_map.at(x - 1).at(y) == Define::eMapType::road || _map.at(x - 1).at(y) == Define::eMapType::goal)
+		if (_bfs_map.at(x - 1).at(y) == Define::eMapType::road || _map.map.at(x - 1).at(y) == Define::eMapType::goal)
 			return true;
 		break;
 	default:
@@ -212,22 +218,25 @@ bool BFS::judge_road(int dict) const
 
 void BFS::draw() const
 {
+	Coor start = _map.start, end = _map.end;
+	vector<vector <int>> map = _map.map;
+
 	Sleep(100);
 
 	for (int i = 0; i < Define::MAP_SIZE; i++) {
 		for (int j = 0; j < Define::MAP_SIZE; j++)
 		{
-			if (_map.at(i).at(j) == Define::eMapType::wall) {
+			if (map.at(i).at(j) == Define::eMapType::wall) {
 				DrawString(20 + 20 * i, 20 + 20 * j, "Å°", GetColor(255, 255, 255));
 			}
 			else {
-				if (i == start_x && j == start_y) {
+				if (i == start.x && j == start.y) {
 					DrawString(20 + 20 * i, 20 + 20 * j, "Å°", GetColor(255, 0, 0));
 				}
-				else if (i == end_x && j == end_y) {
+				else if (i == end.x && j == end.y) {
 					DrawString(20 + 20 * i, 20 + 20 * j, "Å°", GetColor(0, 0, 255));
 				}
-				else if (bfs_map.at(i).at(j) > Define::eMapType::eMapTypeNum) {
+				else if (_bfs_map.at(i).at(j) > Define::eMapType::eMapTypeNum) {
 					DrawString(20 + 20 * i, 20 + 20 * j, "Å°", GetColor(0, 255, 0));
 				}
 				else {
@@ -237,7 +246,7 @@ void BFS::draw() const
 		}
 	}
 
-	DrawFormatString(480, 480, GetColor(255, 255, 255), "        start:%d,%d", start_x, start_y);
-	DrawFormatString(480, 500, GetColor(255, 255, 255), "          end:%d,%d", end_x, end_y);
-	DrawFormatString(480, 520, GetColor(255, 255, 255), "now searching:%d,%d", x, y);
+	DrawFormatString(480, 480, GetColor(255, 255, 255), "        start:%d,%d", start.x, start.y);
+	DrawFormatString(480, 500, GetColor(255, 255, 255), "          end:%d,%d", end.x, end.y);
+	DrawFormatString(480, 520, GetColor(255, 255, 255), "now searching:%d,%d", _coor.x, _coor.y);
 }

@@ -1,16 +1,17 @@
 #include "dfs.h"
 
+using namespace std;
 
-DFS::DFS(std::vector<std::vector<int>> map, int start_x, int start_y, int end_x, int end_y) : Abstract(map, start_x, start_y, end_x, end_y),
-dfs_map(map)
+DFS::DFS(Map_Info map) : Abstract(map)
 {
-	s.push({ start_x, start_y });
+	_dfs_map = map.map;
+	_s.push(map.start);
 }
 
 void DFS::update()
 {
-	if (_map.at(x).at(y) == Define::eMapType::goal) {
-		end_flag = true;
+	if (_map.map.at(_coor.x).at(_coor.y) == Define::eMapType::goal) {
+		_end_flag = true;
 	}
 	else {
 		dfs();
@@ -19,19 +20,22 @@ void DFS::update()
 
 void DFS::finalize()
 {
+	Coor start = _map.start, end = _map.end;
+	vector<vector<int>> map = _map.map;
+
 	ClearDrawScreen();
 
 	for (int i = 0; i < Define::MAP_SIZE; i++) {
 		for (int j = 0; j < Define::MAP_SIZE; j++)
 		{
-			if (_map.at(i).at(j) == Define::eMapType::wall) {
+			if (map.at(i).at(j) == Define::eMapType::wall) {
 				DrawString(20 + 20 * i, 20 + 20 * j, "¡", GetColor(255, 255, 255));
 			}
 			else {
-				if (i == start_x && j == start_y) {
+				if (i == start.x && j == start.y) {
 					DrawString(20 + 20 * i, 20 + 20 * j, "¡", GetColor(255, 0, 0));
 				}
-				else if (i == end_x && j == end_y) {
+				else if (i == end.x && j == end.y) {
 					DrawString(20 + 20 * i, 20 + 20 * j, "¡", GetColor(0, 0, 255));
 				}
 				else
@@ -40,14 +44,14 @@ void DFS::finalize()
 		}
 	}
 
-	while (!s.empty()) {
-		if ((s.top().x != start_x || s.top().y != start_y) && (s.top().x != end_x || s.top().y != end_y))
-			DrawString(20 + 20 * s.top().x, 20 + 20 * s.top().y, "¡", GetColor(0, 255, 0));
+	while (!_s.empty()) {
+		if ((_s.top().x != start.x || _s.top().y != start.y) && (_s.top().x != end.x || _s.top().y != end.y))
+			DrawString(20 + 20 * _s.top().x, 20 + 20 * _s.top().y, "¡", GetColor(0, 255, 0));
 
-		s.pop();
+		_s.pop();
 	}
 
-	DrawFormatString(500, 480, GetColor(255, 255, 255), "%d", turn);
+	DrawFormatString(500, 480, GetColor(255, 255, 255), "%d", _turn);
 	DrawString(500, 500, "please hit key", GetColor(255, 255, 255));
 
 	ScreenFlip();
@@ -58,65 +62,67 @@ void DFS::finalize()
 void DFS::dfs()
 {
 	if (judge_end()) {
-		dfs_map.at(x).at(y) = Define::eMapType::eMapTypeNum;
+		_dfs_map.at(_coor.x).at(_coor.y) = Define::eMapType::eMapTypeNum;
 
-		s.pop();
+		_s.pop();
 
-		x = s.top().x;
-		y = s.top().y;
+		_coor.x = _s.top().x;
+		_coor.y = _s.top().y;
 	}
 	else {
-		if (judge_wall(now_dict)) {
-			now_dict++;
+		if (judge_wall(_now_dict)) {
+			_now_dict++;
 		}
 		else {
-			dfs_map.at(x).at(y) = Define::eMapType::eMapTypeNum;
+			_dfs_map.at(_coor.x).at(_coor.y) = Define::eMapType::eMapTypeNum;
 
-			switch (now_dict)
+			switch (_now_dict)
 			{
 			case eDict::right:
-				x++;
+				_coor.x++;
 				break;
 			case eDict::up:
-				y--;
+				_coor.y--;
 				break;
 			case eDict::left:
-				x--;
+				_coor.x--;
 				break;
 			case eDict::down:
-				y++;
+				_coor.y++;
 				break;
 			}
 
-			turn++;
+			_turn++;
 
-			s.push({ x, y });
+			_s.push({ _coor.x, _coor.y });
 
 			Sleep(100);
 
-			now_dict = right;
+			_now_dict = right;
 		}
 	}
 }
 
 bool DFS::judge_wall(int dict) const
 {
+	int x = _coor.x, y = _coor.y;
+
 	switch (dict)
 	{
 	case eDict::up:
-		if (dfs_map.at(x).at(y - 1) == Define::eMapType::wall || dfs_map.at(x).at(y - 1) == Define::eMapType::eMapTypeNum)
+		if (_dfs_map.at(x).at(y - 1) == Define::eMapType::wall || _dfs_map.at(x).at(y - 1) == Define::eMapType::eMapTypeNum)
 			return true;
 		break;
 	case eDict::down:
-		if (dfs_map.at(x).at(y + 1) == Define::eMapType::wall || dfs_map.at(x).at(y + 1) == Define::eMapType::eMapTypeNum)
+		if (_dfs_map.at(x).at(y + 1) == Define::eMapType::wall || _dfs_map.at(x).at(y + 1) == Define::eMapType::eMapTypeNum)
 			return true;
 		break;
 	case eDict::right:
-		if (dfs_map.at(x + 1).at(y) == Define::eMapType::wall || dfs_map.at(x + 1).at(y) == Define::eMapType::eMapTypeNum)
+		if (_dfs_map.at(x + 1).at(y) == Define::eMapType::wall || _dfs_map.at(x + 1).at(y) == Define::eMapType::eMapTypeNum)
 			return true;
 		break;
 	case eDict::left:
-		if (dfs_map.at(x - 1).at(y) == Define::eMapType::wall || dfs_map.at(x - 1).at(y) == Define::eMapType::eMapTypeNum)
+		if (_dfs_map.at(x - 1).at(y) == Define::eMapType::wall || _dfs_map.at(x - 1).at(y) == Define::eMapType::eMapTypeNum)
 			return true;
 		break;
 	default:
@@ -139,20 +145,23 @@ bool DFS::judge_end() const
 
 void DFS::draw() const
 {
+	Coor start = _map.start, end = _map.end;
+	vector<vector <int>> map = _map.map;
+
 	for (int i = 0; i < Define::MAP_SIZE; i++) {
 		for (int j = 0; j < Define::MAP_SIZE; j++)
 		{
-			if (_map.at(i).at(j) == Define::eMapType::wall) {
+			if (map.at(i).at(j) == Define::eMapType::wall) {
 				DrawString(20 + 20 * i, 20 + 20 * j, "¡", GetColor(255, 255, 255));
 			}
 			else {
-				if (i == start_x && j == start_y) {
+				if (i == start.x && j == start.y) {
 					DrawString(20 + 20 * i, 20 + 20 * j, "¡", GetColor(255, 0, 0));
 				}
-				else if (i == end_x && j == end_y) {
+				else if (i == end.x && j == end.y) {
 					DrawString(20 + 20 * i, 20 + 20 * j, "¡", GetColor(0, 0, 255));
 				}
-				else if (dfs_map.at(i).at(j) == Define::eMapType::eMapTypeNum) {
+				else if (_dfs_map.at(i).at(j) == Define::eMapType::eMapTypeNum) {
 					DrawString(20 + 20 * i, 20 + 20 * j, "¡", GetColor(0, 255, 0));
 				}
 				else {
@@ -162,7 +171,8 @@ void DFS::draw() const
 		}
 	}
 
-	DrawFormatString(480, 480, GetColor(255, 255, 255), "        start:%d,%d", start_x, start_y);
-	DrawFormatString(480, 500, GetColor(255, 255, 255), "          end:%d,%d", end_x, end_y);
-	DrawFormatString(480, 520, GetColor(255, 255, 255), "now searching:%d,%d", x, y);
+	DrawFormatString(480, 480, GetColor(255, 255, 255), "        start:%d,%d", start.x, start.y);
+	DrawFormatString(480, 500, GetColor(255, 255, 255), "          end:%d,%d", end.x, end.y);
+	DrawFormatString(480, 520, GetColor(255, 255, 255), "now searching:%d,%d", _coor.x, _coor.y);
+
 }

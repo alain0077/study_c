@@ -5,10 +5,10 @@
 
 class Define final {
 public:
-	const static int WIN_W;	//ウィンドウサイズ横
-	const static int WIN_H;	//ウィンドウサイズ縦
+	const static int WIN_W;	//繧ｦ繧｣繝ｳ繝峨え繧ｵ繧､繧ｺ讓ｪ
+	const static int WIN_H;	//繧ｦ繧｣繝ｳ繝峨え繧ｵ繧､繧ｺ邵ｦ
 
-	const static int MAP_SIZE; //マップのサイズ
+	const static int MAP_SIZE; //繝槭ャ繝励�ｮ繧ｵ繧､繧ｺ
 
 	enum eMapType {
 		wall,

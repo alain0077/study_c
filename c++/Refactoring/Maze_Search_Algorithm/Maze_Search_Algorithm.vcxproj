@@ -156,7 +156,9 @@
     <ClCompile Include="Define.cpp" />
     <ClCompile Include="dfs.cpp" />
     <ClCompile Include="h_bfs.cpp" />
+    <ClCompile Include="Looper.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Abstract.h" />
@@ -164,6 +166,8 @@
     <ClInclude Include="Define.h" />
     <ClInclude Include="dfs.h" />
     <ClInclude Include="h_bfs.h" />
+    <ClInclude Include="Looper.h" />
+    <ClInclude Include="Map.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

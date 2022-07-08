@@ -1,2 +1,0 @@
-C:\Users\yuto1\study\study_c\c++\Refactoring\Maze_Search_Algorithm\Debug\Maze_Search_Algorithm.exe
-C:\Users\yuto1\study\study_c\c++\Refactoring\Maze_Search_Algorithm\Debug\Maze_Search_Algorithm.pdb

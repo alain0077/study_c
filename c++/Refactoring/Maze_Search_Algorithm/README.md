@@ -9,8 +9,6 @@ http://objectclub.jp/technicaldoc/refactoring/refact-what
 
 
 ## 行ったリファクタリングについて
-### 一覧
-・問題点１
 
 ### 問題点１
 Main関数がマップの生成と各探索手法を行うクラスの呼び出し・管理をしていたため，読みにくくなっていた．

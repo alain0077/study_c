@@ -1,6 +1,7 @@
 Maze_Search_Algorithmのリファクタリングしたプログラムです．
 
 リファクタリングの参考にしたサイト
+
 https://refactoring.com/catalog/
 http://objectclub.jp/technicaldoc/refactoring/refact-what
 

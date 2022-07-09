@@ -76,7 +76,7 @@ bool Map::CreatMap(int mode)
 
 		while (!_comp)
 		{
-			vector<int> _tmp = { 1,2,3,4 };
+			vector<int> _tmp = { 0,1,2,3 };
 
 			vector<int> dict;
 
@@ -97,56 +97,24 @@ bool Map::CreatMap(int mode)
 			{
 				bool _flag = false;
 
-				switch (dict[0])
-				{
-				case 1:
-					if (_map.at(_row).at(_col - 2) != Define::eMapType::road) {
-						_map.at(_row).at(--_col) = Define::eMapType::road;
+				vector<pair<int, int>> d = { {0, -1}, {0, 1}, {-1, 0}, {1, 0} };
 
-						_end = { _row, _col };
+				pair<int, int> offset = d[dict[0]];
 
-						_flag = true;
-					}
-					else {
-						dict.erase(dict.begin());
-					}
-					break;
-				case 2:
-					if (_map.at(_row).at(_col + 2) != Define::eMapType::road) {
-						_map.at(_row).at(++_col) = Define::eMapType::road;
+				if (_map.at(_row + offset.first * 2).at(_col + offset.second * 2) != Define::eMapType::road) {
+					_map.at(_row + offset.first).at(_col + offset.second) = Define::eMapType::road;
 
-						_end = { _row, _col };
-						
-						_flag = true;
-					}
-					else {
-						dict.erase(dict.begin());
-					}
-					break;
-				case 3:
-					if (_map.at(_row - 2).at(_col) != Define::eMapType::road) {
-						_map.at(--_row).at(_col) = Define::eMapType::road;
+					_row += offset.first * 2;
+					_col += offset.second * 2;
 
-						_end = { _row, _col };
+					_map.at(_row).at(_col) = Define::eMapType::road;
 
-						_flag = true;
-					}
-					else {
-						dict.erase(dict.begin());
-					}
-					break;
-				case 4:
-					if (_map.at(_row + 2).at(_col) != Define::eMapType::road) {
-						_map.at(++_row).at(_col) = Define::eMapType::road;
+					_end = { _row, _col };
 
-						_end = { _row, _col };
-
-						_flag = true;
-					}
-					else {
-						dict.erase(dict.begin());
-					}
-					break;
+					_flag = true;
+				}
+				else {
+					dict.erase(dict.begin());
 				}
 
 				if (dict.empty()) {

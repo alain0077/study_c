@@ -102,7 +102,6 @@ bool Map::CreatMap(int mode)
 				case 1:
 					if (_map.at(_row).at(_col - 2) != Define::eMapType::road) {
 						_map.at(_row).at(--_col) = Define::eMapType::road;
-						_map.at(_row).at(--_col) = Define::eMapType::road;
 
 						_end = { _row, _col };
 
@@ -114,7 +113,6 @@ bool Map::CreatMap(int mode)
 					break;
 				case 2:
 					if (_map.at(_row).at(_col + 2) != Define::eMapType::road) {
-						_map.at(_row).at(++_col) = Define::eMapType::road;
 						_map.at(_row).at(++_col) = Define::eMapType::road;
 
 						_end = { _row, _col };
@@ -128,7 +126,6 @@ bool Map::CreatMap(int mode)
 				case 3:
 					if (_map.at(_row - 2).at(_col) != Define::eMapType::road) {
 						_map.at(--_row).at(_col) = Define::eMapType::road;
-						_map.at(--_row).at(_col) = Define::eMapType::road;
 
 						_end = { _row, _col };
 
@@ -140,7 +137,6 @@ bool Map::CreatMap(int mode)
 					break;
 				case 4:
 					if (_map.at(_row + 2).at(_col) != Define::eMapType::road) {
-						_map.at(++_row).at(_col) = Define::eMapType::road;
 						_map.at(++_row).at(_col) = Define::eMapType::road;
 
 						_end = { _row, _col };

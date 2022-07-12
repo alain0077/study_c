@@ -14,4 +14,11 @@ public:
 	void draw() const override;
 	// Return line segments for collision detection
 	std::vector<std::pair<Coor, Coor>> Edge() override;
+
+private:
+	double _x_wrap_point_offset;
+	double _y_wrap_point_offset;
+
+	void Pattern(int p) override;
+	void Move(int) override;
 };

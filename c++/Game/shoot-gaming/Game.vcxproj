@@ -51,6 +51,7 @@
     <ClInclude Include="BulletMgr.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="eBalletPattern.h" />
+    <ClInclude Include="eEnemyData.h" />
     <ClInclude Include="EnemyMgr.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="eScene.h" />

@@ -38,7 +38,7 @@ void GameOverScene::update()
 void GameOverScene::draw() const
 {
 	DrawString(Define::WIN_W / 2 - Define::Result_Score_X + 160, Define::WIN_H / 2 - Define::Result_Score_Y - 120, "Game Over!", GetColor(255, 255, 255));
-	DrawFormatString(Define::WIN_W / 2 - Define::Result_Score_X, Define::WIN_H / 2 - Define::Result_Score_Y, GetColor(255, 255, 255), "          time  : %d", _time);
+	DrawFormatString(Define::WIN_W / 2 - Define::Result_Score_X, Define::WIN_H / 2 - Define::Result_Score_Y, GetColor(255, 255, 255), "          time  : %02d'%02d", _time / 60, _time % 60);
 	DrawFormatString(Define::WIN_W / 2 - Define::Result_Score_X, Define::WIN_H / 2 - Define::Result_Score_Y + 20, GetColor(255, 255, 255), "          score : %d", _score);
 
 	DrawString(Define::WIN_W / 2 - Define::Result_Restart_X, Define::WIN_H / 2 + Define::Result_Restart_Y, "Restart", GetColor(255, 255, 255));

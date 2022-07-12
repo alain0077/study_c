@@ -8,16 +8,6 @@
 #include <vector>
 #include <queue>
 
-struct E_info
-{
-	int pattern,
-		hp;
-
-	double x, y;
-
-	std::string img;
-};
-
 class IShootListener;
 class IIncScoreListener;
 
@@ -34,10 +24,12 @@ public:
 
 private:
 	int _nowStage;
+	unsigned int _cnt;
 	std::vector<std::string> _stage;
 	std::vector<std::string> _stages;
 	std::vector<AbstractEnemy*> _enemy;
 
+	std::vector<std::vector<std::string>> _Schedule;
 	std::vector<std::string> FileLoad(std::string fname);
 	bool StageLoad(std::vector<std::string> stage);
 

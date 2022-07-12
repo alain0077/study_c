@@ -25,5 +25,7 @@ void ScoreMgr::IncScore(int n)
 void ScoreMgr::draw() const
 {
 	DrawFormatString(400, 120, GetColor(255, 255, 255), "score : %d", _score);
-	DrawFormatString(400, 140, GetColor(255, 255, 255), " time : %d", (GetNowCount() - _time) / 1000);
+	
+	int t = (GetNowCount() - _time) /1000;
+	DrawFormatString(400, 140, GetColor(255, 255, 255), " time : %02d'%02d", t / 60, t % 60);
 }

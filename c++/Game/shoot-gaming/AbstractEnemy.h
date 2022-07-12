@@ -20,9 +20,14 @@ public:
 	virtual void init() = 0;
 	bool update();
 	virtual void draw() const = 0;
+	
 	Status Lis_Status() override { return { { _x, _y }, {_heigh, _width} }; }
+
 	// Return line segments for collision detection
 	virtual std::vector<std::pair<Coor, Coor>> Edge() = 0;
+
+	// Whether or not it is on the outside
+	bool IsOutside() const;
 
 protected:
 
@@ -79,8 +84,8 @@ protected:
 
 private:
 	//パターンに応じたパラメータを設定
-	void Pattern(int p);
+	virtual void Pattern(int p) = 0;
 
 	//パターンに応じたx,yを返す
-	void Move(int p);
+	virtual void Move(int p) = 0;
 };

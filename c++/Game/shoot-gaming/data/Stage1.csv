@@ -1,4 +1,8 @@
-hp,pattern,x,y,img
-2,2,50,30,test.png
-2,2,70,50,test.png
-2,2,20,10,test.png
+hp,pattern,x,y,img,wait
+2,2,60,40,test.png,0
+2,2,80,50,test.png,0
+2,2,100,60,test.png,0
+2,1,0,80,test.png,10
+2,3,-10,60,test.png,10
+2,5,0,60,test.png,0
+2,4,10,60,test.png,0

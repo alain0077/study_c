@@ -6,7 +6,7 @@
 using namespace std;
 
 GameScene::GameScene(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter)
-, NowSelect(0)
+, NowSelect(0), _StageChangeFlag(false), _NowStage(1)
 {
 	_bulletMgr = new BulletMgr();
 	_scoreMgr = new ScoreMgr();
@@ -17,24 +17,11 @@ GameScene::GameScene(IOnSceneChangedListener* impl, const Parameter& parameter) 
 
 void GameScene::update()
 {
-	_bulletMgr->update();
-
-	if (!_pMgr->update())
+	if(!_StageChangeFlag)
 	{
-		Parameter parameter;
-		const bool stackClear = true;
+		_bulletMgr->update();
 
-		parameter.set("ParameterTagResultScore", _scoreMgr->getFilalScore());
-		parameter.set("ParameterTagTime", _scoreMgr->getTime());
-
-		_implSceneChanged->onSceneChanged(eScene::GameOver, parameter, stackClear);
-
-		return;
-	}
-	
-	if (!_eMgr->update())
-	{
-		if (!_eMgr->NextStage())
+		if (!_pMgr->update())
 		{
 			Parameter parameter;
 			const bool stackClear = true;
@@ -42,9 +29,37 @@ void GameScene::update()
 			parameter.set("ParameterTagResultScore", _scoreMgr->getFilalScore());
 			parameter.set("ParameterTagTime", _scoreMgr->getTime());
 
-			_implSceneChanged->onSceneChanged(eScene::Result, parameter, stackClear);
+			_implSceneChanged->onSceneChanged(eScene::GameOver, parameter, stackClear);
 
 			return;
+		}
+
+		if (!_eMgr->update())
+		{
+			if (!_eMgr->NextStage())
+			{
+				Parameter parameter;
+				const bool stackClear = true;
+
+				parameter.set("ParameterTagResultScore", _scoreMgr->getFilalScore());
+				parameter.set("ParameterTagTime", _scoreMgr->getTime());
+
+				_implSceneChanged->onSceneChanged(eScene::Result, parameter, stackClear);
+
+				return;
+			}
+			else
+			{
+				_bulletMgr->init();
+				_StageChangeFlag = true;
+				_NowStage++;
+			}
+		}
+	}
+	else
+	{
+		if (Keyboard::getIns()->getPressingCount(KEY_INPUT_RETURN) == 1) {
+			_StageChangeFlag = false;
 		}
 	}
 
@@ -53,24 +68,28 @@ void GameScene::update()
 
 void GameScene::draw() const
 {
-	_bulletMgr->draw();
-	_pMgr->draw();
-	_eMgr->draw();
+	if (!_StageChangeFlag)
+	{
+		_bulletMgr->draw();
+		_pMgr->draw();
+		_eMgr->draw();
+		_scoreMgr->draw();
+	}
+
 	_scoreMgr->draw();
 
-	DrawBox(Define::GAME_WIN_X1, Define::GAME_WIN_Y1, Define::GAME_WIN_X2, Define::GAME_WIN_Y2, GetColor(255, 255, 255), false);
-	
-	//DrawString(100, 100, "Å°", GetColor(255, 255, 255));
-	//DrawBox(108, 99, 108, 114, GetColor(0, 0, 255), false);
-	//DrawPixel(101, 101, GetColor(255, 0, 255));
-	//DrawPixel(114, 101, GetColor(255, 0, 255));
-	//DrawPixel(101, 113, GetColor(255, 0, 255));
-	//DrawPixel(114, 113, GetColor(255, 0, 255));
+	if(_StageChangeFlag)
+	{
+		DrawFormatString(100, 100, GetColor(255, 255, 255), "Next Stage is %d", _NowStage);
+		DrawString(100, 160, "Please Hit EnterKey", GetColor(255, 255, 255));
+	}
 
-	//DrawString(200, 200, "|", GetColor(255, 255, 255));
-	//DrawPixel(204, 200, GetColor(255, 0, 255));
-	//DrawPixel(204, 215, GetColor(255, 0, 255));
-	//DrawPixel(204, 211, GetColor(255, 0, 255));
-	//DrawPixel(208, 207, GetColor(255, 0, 255));
-	//DrawString(Define::START_X, Define::START_Y, "Ç±Ç±ÇÕGameSceneÇ≈Ç∑ÅI", GetColor(255, 255, 255));
+
+	DrawBox(Define::GAME_WIN_X1, Define::GAME_WIN_Y1, Define::GAME_WIN_X2, Define::GAME_WIN_Y2, GetColor(255, 255, 255), false);
+	DrawBox(Define::GAME_WIN_X1 - 40, Define::GAME_WIN_Y1, Define::GAME_WIN_X1, Define::GAME_WIN_Y2, GetColor(0, 0, 0), true);
+	DrawBox(Define::GAME_WIN_X1, Define::GAME_WIN_Y1 - 40, Define::GAME_WIN_X2, Define::GAME_WIN_Y1, GetColor(0, 0, 0), true);
+	DrawBox(Define::GAME_WIN_X2, Define::GAME_WIN_Y1, Define::GAME_WIN_X2 + 40, Define::GAME_WIN_Y2, GetColor(0, 0, 0), true);
+	DrawBox(Define::GAME_WIN_X1, Define::GAME_WIN_Y2, Define::GAME_WIN_X2, Define::GAME_WIN_Y2 + 40, GetColor(0, 0, 0), true);
+
+	DrawFormatString(410, 100, GetColor(255, 255, 255), "Stage %d", _NowStage);
 }

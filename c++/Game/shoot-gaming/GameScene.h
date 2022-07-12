@@ -20,6 +20,8 @@ public:
 
 private:
 	int NowSelect;
+	int _NowStage;
+	bool _StageChangeFlag;
 
 	BulletMgr* _bulletMgr;
 	EnemyMgr* _eMgr;

@@ -70,4 +70,17 @@ void TitleScene::draw() const
 		DrawString(Define::UNPOPULATED_X, Define::UNPOPULATED_Y, "______________", GetColor(255, 255, 255));
 		break;
 	}
+
+	//DrawString(100, 100, "Å°", GetColor(255, 255, 255));
+	//DrawBox(108, 99, 108, 114, GetColor(0, 0, 255), false);
+	//DrawPixel(101, 101, GetColor(255, 0, 255));
+	//DrawPixel(114, 101, GetColor(255, 0, 255));
+	//DrawPixel(101, 113, GetColor(255, 0, 255));
+	//DrawPixel(114, 113, GetColor(255, 0, 255));
+
+	//DrawString(200, 200, "|", GetColor(255, 255, 255));
+	//DrawPixel(204, 200, GetColor(255, 0, 255));
+	//DrawPixel(204, 215, GetColor(255, 0, 255));
+	//DrawPixel(204, 211, GetColor(255, 0, 255));
+	//DrawPixel(208, 207, GetColor(255, 0, 255));
 }

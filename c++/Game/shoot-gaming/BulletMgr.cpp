@@ -39,11 +39,11 @@ bool BulletMgr::IsCross(Coor a, Coor b, Coor c, Coor d)
 	* Do line AB and line CD intersect?
 	*/
 	if (((a.x - b.x) * (c.y - a.y) - (a.y - b.y) * (c.x - a.x)) *
-		((a.x - b.x) * (d.y - a.y) - (a.y - b.y) * (d.x - a.x)) >= 0) {
+		((a.x - b.x) * (d.y - a.y) - (a.y - b.y) * (d.x - a.x)) > 0) {
 		return false;
 	}
 	if (((c.x - d.x) * (a.y - c.y) - (c.y - d.y) * (a.x - c.x)) *
-		((c.x - d.x) * (b.y - c.y) - (c.y - d.y) * (b.x - c.x)) >= 0) {
+		((c.x - d.x) * (b.y - c.y) - (c.y - d.y) * (b.x - c.x)) > 0) {
 		return false;
 	}
 
@@ -127,7 +127,9 @@ int BulletMgr::CheckTaken(vector<pair<Coor, Coor>> edge, int flag)
 			for (auto e : edge)
 			{
 				if (IsCross(e.first, e.second, v1, v2) ||
-					IsCross(e.first, e.second, v3, v4)) 
+					IsCross(e.first, e.second, v3, v4) ||
+					IsCross(v1, v2, e.first, e.second) ||
+					IsCross(v3, v4, e.first, e.second))
 				{
 					is_cross = true;
 					break;
@@ -155,13 +157,17 @@ int BulletMgr::CheckTaken(vector<pair<Coor, Coor>> edge, int flag)
 				continue;
 			}
 			break;
+		/*
+		*  b_type : |
+		*/
 		case 1:
 			v1 = { p.first + off.first, p.second };
 			v2 = { p.first + off.first, p.second + _h_w.second };
 
 			for (auto e : edge)
 			{
-				if (IsCross(e.first, e.second, v1, v2))
+				if (IsCross(e.first, e.second, v1, v2) ||
+					IsCross(v1, v2, e.first, e.second))
 				{
 					is_cross = true;
 					break;
@@ -175,7 +181,6 @@ int BulletMgr::CheckTaken(vector<pair<Coor, Coor>> edge, int flag)
 				if (flag) {
 					itr = _bullets.erase(itr);
 					end = _bullets.end();
-
 				}
 				else {
 					itr = _ebullets.erase(itr);

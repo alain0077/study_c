@@ -62,7 +62,7 @@ bool AbstractPlayer::update()
 	if (_shot_cnt > 40) {
 		if (Keyboard::getIns()->getPressingCount(KEY_INPUT_SPACE))
 		{
-			_ptr->Shoot(_x, _y, -Define::PI / 2, 3.0, eBalletPattern::PlayerBlt, 0);
+			_ptr->Shoot(_x  + _width / 2 - 3.0, _y, -Define::PI / 2, 3.0, eBalletPattern::PlayerBlt, 0);
 			_shot_cnt = 0;
 		}
 	}

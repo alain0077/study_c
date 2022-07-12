@@ -11,17 +11,18 @@ AbstractEnemy::AbstractEnemy(IShootListener *ptr, int hp, int pattern, double x,
 	_x(x),
 	_y(y),
 	_cnt(0),
-	_flag(live),
+	_flag(0),
 	_img(img_path)
 {
 }
 
 bool AbstractEnemy::update()
 {
-	if(!(_cnt%60)) _ptr->Shoot(_x, _y, Define::PI / 2, 2.0, eBalletPattern::EnemyBlt, 1);
+	if (!(_cnt % 60)) _ptr->Shoot(_x + _x_offset + _width / 2 - 2.0, _y + _y_offset + 3.0, Define::PI / 2, 2.0, eBalletPattern::EnemyBlt, 1);
 
 	_cnt++;
-	Move(_pattern);
+	
+	Move();
 
 	_hp -= _ptr->CheckTaken(Edge(), 1);
 

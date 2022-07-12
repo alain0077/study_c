@@ -7,6 +7,8 @@
 #include "Macro.h"
 #include "Keyboard.h"
 
+#include "TestScene.h"
+
 using namespace std;
 
 Looper::Looper()

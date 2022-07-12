@@ -24,7 +24,7 @@ public:
 
 	bool IsTakenCircle(double x, double y, double r);
 
-	B_Status getStatus() { return { 0, {_x, _y}, {_x_offset, _y_offset}, {_heigh, _width} };}
+	B_Status getStatus() { return { _pattern, {_x, _y}, {_x_offset, _y_offset}, {_heigh, _width} };}
 
 private:
 	int _cnt,
@@ -38,5 +38,7 @@ private:
 		_width,
 		_heigh,
 		_ang,
+		_ang_x,
+		_ang_y,
 		_speed;
 };

@@ -22,6 +22,7 @@
     <ClCompile Include="AbstractEnemy.cpp" />
     <ClCompile Include="AbstractPlayer.cpp" />
     <ClCompile Include="AbstractScene.cpp" />
+    <ClCompile Include="BossEnemy.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletMgr.cpp" />
     <ClCompile Include="Define.cpp" />
@@ -41,12 +42,14 @@
     <ClCompile Include="ResultScene.cpp" />
     <ClCompile Include="ScoreMgr.cpp" />
     <ClCompile Include="SystemMain.cpp" />
+    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractEnemy.h" />
     <ClInclude Include="AbstractPlayer.h" />
     <ClInclude Include="AbstractScene.h" />
+    <ClInclude Include="BossEnemy.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletMgr.h" />
     <ClInclude Include="Define.h" />
@@ -75,6 +78,7 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SystemMain.h" />
     <ClInclude Include="Task.h" />
+    <ClInclude Include="TestScene.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

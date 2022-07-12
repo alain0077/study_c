@@ -9,11 +9,6 @@ class IShootListener;
 
 class AbstractEnemy : public Task, public IStatusListener
 {
-	enum eE_Flag {
-		live,
-		death,
-	};
-
 public:
 	AbstractEnemy(IShootListener* ptr, int hp, int _pattern, double x, double y, std::string img_path);
 	virtual ~AbstractEnemy() = default;
@@ -50,14 +45,17 @@ protected:
 		//幅
 		_width,
 
+		//高さ
+		_heigh,
+
 		// x's soffset
 		_x_offset,
 
 		// y's offset
 		_y_offset,
 
-		//高さ
-		_heigh;
+		//色
+		_color;
 
 		//画像ファイルのパス
 	std::string _img;
@@ -75,17 +73,14 @@ protected:
 	/*弾幕関連*/
 
 		//弾の種類
-	int _bltype,
-
-		//色
-		_color;
+	int _bltype;
 
 	IShootListener* _ptr;
 
 private:
 	//パターンに応じたパラメータを設定
-	virtual void Pattern(int p) = 0;
+	virtual void Pattern() = 0;
 
 	//パターンに応じたx,yを返す
-	virtual void Move(int p) = 0;
+	virtual void Move() = 0;
 };

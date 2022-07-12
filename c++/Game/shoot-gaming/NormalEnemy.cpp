@@ -11,7 +11,7 @@ NormalEnemy::NormalEnemy(IShootListener* pt, int hp, int pattern, double x, doub
 	_x_wrap_point_offset = x;
 	_y_wrap_point_offset = y;
 
-	Pattern(_pattern);
+	Pattern();
 }
 
 void NormalEnemy::init()
@@ -26,16 +26,16 @@ void NormalEnemy::draw() const
 vector<pair<Coor, Coor>> NormalEnemy::Edge()
 {
 	Coor a = { _x + _x_offset, _y + _y_offset },
-		 b = { _x + _x_offset + _width, _y + _y_offset },
-		 c = { _x + _x_offset, _y + _y_offset + _heigh },
-		 d = { _x + _x_offset + _width, _y + _y_offset + _heigh };
+		 b = { _x + _width + _x_offset, _y + _y_offset },
+		 c = { _x + _x_offset, _y + _heigh + _y_offset },
+		 d = { _x + _width + _x_offset, _y + _heigh + _y_offset };
 
 	return { { a, b }, { b, c }, { c, d }, {d, a} };
 }
 
-void NormalEnemy::Pattern(int p)
+void NormalEnemy::Pattern()
 {
-	switch (p)
+	switch (_pattern)
 	{
 	case 0:
 		_x_ang = 0.0;
@@ -59,13 +59,13 @@ void NormalEnemy::Pattern(int p)
 		_sp = 1.0;
 		break;
 	case 4:
-		_x = (double)Define::GAME_WIN_X2 - _width;
+		_x = (double)Define::GAME_WIN_X2 - _width / 2.0;
 		_x_ang = 0.0;
 		_y_ang = Define::PI / 2.0;
 		_sp = 1.0;
 		break;
 	case 5:
-		_x = (double)Define::GAME_WIN_X2 - _width;
+		_x = (double)Define::GAME_WIN_X2 - _width / 2.0;
 		_x_ang = Define::PI / 3.0;
 		_y_ang = Define::PI / 3.0;
 		_sp = 2.0;
@@ -75,9 +75,9 @@ void NormalEnemy::Pattern(int p)
 	}
 }
 
-void NormalEnemy::Move(int p)
+void NormalEnemy::Move()
 {
-	switch (p)
+	switch (_pattern)
 	{
 	case 0:
 		if (_cnt % 360 < 90) {

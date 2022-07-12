@@ -17,7 +17,7 @@ Bullet::Bullet(double x, double y, double ang, double sp, int ptn) :
 	_width(0.0),
 	_heigh(0.0)
 {
-	switch (_pattern)
+	switch (ptn)
 	{
 	case eBalletPattern::EnemyBlt:
 		_width = 8.0;
@@ -33,6 +33,9 @@ Bullet::Bullet(double x, double y, double ang, double sp, int ptn) :
 		ERR("ë∂ç›ÇµÇ»Ç¢íeÇ™ëIëÇ≥ÇÍÇ‹ÇµÇΩÅI");
 		break;
 	}
+
+	_ang_x = cos(ang);
+	_ang_y = sin(ang);
 }
 
 void Bullet::init()
@@ -41,8 +44,8 @@ void Bullet::init()
 
 bool Bullet::update()
 {
-	_x += cos(_ang) * _speed;
-	_y += sin(_ang) * _speed;
+	_x += _ang_x * _speed;
+	_y += _ang_y * _speed;
 
 	if (_x < Define::GAME_WIN_X1 - _width || _x > Define::GAME_WIN_X2 + _width || _y < Define::GAME_WIN_Y1 - _heigh || _y > Define::GAME_WIN_Y2 + _heigh) return false;
 
@@ -56,7 +59,7 @@ bool Bullet::IsTakenCircle(double x, double y, double r)
 	switch (_pattern)
 	{
 	case eBalletPattern::EnemyBlt:
-		if (r + _width >= pow(x - (_x + _width / 2.0), 2.0) + pow(y - (_y + (3.0 + _heigh)), 2.0))
+		if (r + _width >= pow(x - (_x + _width / 2.0), 2.0) * sin(_ang) + pow(y - (_y + (3.0 + _heigh)), 2.0))
 			return true;
 		break;
 	case eBalletPattern::PlayerBlt:

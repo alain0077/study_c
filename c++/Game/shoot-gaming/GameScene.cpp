@@ -87,9 +87,9 @@ void GameScene::draw() const
 
 	DrawBox(Define::GAME_WIN_X1, Define::GAME_WIN_Y1, Define::GAME_WIN_X2, Define::GAME_WIN_Y2, GetColor(255, 255, 255), false);
 	DrawBox(Define::GAME_WIN_X1 - 40, Define::GAME_WIN_Y1, Define::GAME_WIN_X1, Define::GAME_WIN_Y2, GetColor(0, 0, 0), true);
-	DrawBox(Define::GAME_WIN_X1, Define::GAME_WIN_Y1 - 40, Define::GAME_WIN_X2, Define::GAME_WIN_Y1, GetColor(0, 0, 0), true);
+	DrawBox(Define::GAME_WIN_X1 - 40, Define::GAME_WIN_Y1 - 40, Define::GAME_WIN_X2 + 40, Define::GAME_WIN_Y1, GetColor(0, 0, 0), true);
 	DrawBox(Define::GAME_WIN_X2, Define::GAME_WIN_Y1, Define::GAME_WIN_X2 + 40, Define::GAME_WIN_Y2, GetColor(0, 0, 0), true);
-	DrawBox(Define::GAME_WIN_X1, Define::GAME_WIN_Y2, Define::GAME_WIN_X2, Define::GAME_WIN_Y2 + 40, GetColor(0, 0, 0), true);
+	DrawBox(Define::GAME_WIN_X1 - 40, Define::GAME_WIN_Y2, Define::GAME_WIN_X2 + 40, Define::GAME_WIN_Y2 + 40, GetColor(0, 0, 0), true);
 
 	DrawFormatString(410, 100, GetColor(255, 255, 255), "Stage %d", _NowStage);
 }

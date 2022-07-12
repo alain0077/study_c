@@ -2,7 +2,6 @@
 
 #include "Task.h"
 #include "AbstractEnemy.h"
-#include <string>
 
 class NormalEnemy : public AbstractEnemy
 {
@@ -19,6 +18,6 @@ private:
 	double _x_wrap_point_offset;
 	double _y_wrap_point_offset;
 
-	void Pattern(int p) override;
-	void Move(int) override;
+	void Pattern() override;
+	void Move() override;
 };

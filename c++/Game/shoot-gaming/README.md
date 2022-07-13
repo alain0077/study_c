@@ -5,6 +5,9 @@
 
 [exe.zip](https://github.com/alain0077/study_c/blob/master/c%2B%2B/Game/shoot-gaming/exe.zip)にexeファイルがあります．
 
+# デモプレイ動画
+
+
 # Class
 本プログラムで実装した一部のクラスについて簡単に説明．
 

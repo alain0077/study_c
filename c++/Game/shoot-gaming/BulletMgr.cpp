@@ -118,11 +118,11 @@ int BulletMgr::CheckTaken(vector<pair<Coor, Coor>> edge, int flag)
 		/*
 		*  b_type : +
 		*/
-		case 0:
-			v1 = { p.first, p.second + off.second + _h_w.second / 2.0 };
-			v2 = { p.first + _h_w.first, p.second + off.second + _h_w.second / 2.0 };
-			v3 = { p.first + _h_w.first / 2.0, p.second + off.second };
-			v4 = { p.first + _h_w.first / 2.0, p.second + off.second + _h_w.second };
+		case eBalletPattern::EnemyBlt:
+			v1 = { p.first, p.second + off.second + _h_w.first / 2.0 };
+			v2 = { p.first + _h_w.second, p.second + off.second + _h_w.first / 2.0 };
+			v3 = { p.first + _h_w.second / 2.0, p.second + off.second };
+			v4 = { p.first + _h_w.second / 2.0, p.second + off.second + _h_w.first };
 
 			for (auto e : edge)
 			{
@@ -135,6 +135,11 @@ int BulletMgr::CheckTaken(vector<pair<Coor, Coor>> edge, int flag)
 					break;
 				}
 			}
+
+			//DrawPixel(p.first, p.second + off.second + _h_w.second / 2.0, GetColor(255, 0, 255));
+			//DrawPixel(p.first + _h_w.first, p.second + off.second + _h_w.second / 2.0, GetColor(255, 0, 255));
+			//DrawPixel(p.first + _h_w.first / 2.0, p.second + off.second, GetColor(255, 0, 255));
+			//DrawPixel(p.first + _h_w.first / 2.0, p.second + off.second + _h_w.second, GetColor(255, 0, 255));
 
 			if (is_cross)
 			{
@@ -160,9 +165,9 @@ int BulletMgr::CheckTaken(vector<pair<Coor, Coor>> edge, int flag)
 		/*
 		*  b_type : |
 		*/
-		case 1:
+		case eBalletPattern::PlayerBlt:
 			v1 = { p.first + off.first, p.second };
-			v2 = { p.first + off.first, p.second + _h_w.second };
+			v2 = { p.first + off.first, p.second + _h_w.first };
 
 			for (auto e : edge)
 			{
@@ -173,6 +178,9 @@ int BulletMgr::CheckTaken(vector<pair<Coor, Coor>> edge, int flag)
 					break;
 				}
 			}
+
+			//DrawPixel(p.first + off.first, p.second, GetColor(255, 0, 255));
+			//DrawPixel(p.first + off.first, p.second + _h_w.first, GetColor(255, 0, 255));
 
 			if (is_cross)
 			{

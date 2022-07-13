@@ -25,6 +25,8 @@ public:
 	virtual std::vector<std::pair<Coor, Coor>> Edge() = 0;
 
 protected:
+	//カウンタ
+	unsigned int _shot_cnt;
 		//フラグ
 	int	_flag,
 
@@ -34,10 +36,7 @@ protected:
 		//幅
 		_width,
 		//高さ
-		_heigh,
-
-		//カウンタ
-		_shot_cnt;
+		_heigh;
 
 	//画像ファイルのパス
 	std::string _img;

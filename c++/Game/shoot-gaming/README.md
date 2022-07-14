@@ -16,8 +16,10 @@ https://github.com/alain0077/study_c/blob/master/c%2B%2B/Game/shoot-gaming/Shoot
 ## 一覧
 + [Looper](#looper)
 + [AbstractScene](#abstractscene)
-+ [AbstractPlayer](#abstractplayer)
++ [AbstractPlayer](#abstractpalyer)
 + [AbstractEnemy](#abstractenemy)
++ [BulletMgr](#bulletmgr)
++ [PlayerMgr](#playermgr)
 
 ## Looper
 [ヘッダ](https://github.com/alain0077/study_c/blob/master/c%2B%2B/Game/shoot-gaming/Looper.h), [ソース](https://github.com/alain0077/study_c/blob/master/c%2B%2B/Game/shoot-gaming/Looper.cpp)

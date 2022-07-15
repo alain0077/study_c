@@ -39,7 +39,7 @@ https://github.com/alain0077/study_c/blob/master/c%2B%2B/Game/shoot-gaming/Shoot
     + Fps \_fps;
 
 ### 主な役割・機能
-ゲームのそれぞれの*Scene*を管理するクラス．関数**onSceneChanged**によって*Scene*の切り替えを行う．作成した*Scene*はメンバ変数**sceneStack**にスタックしていく．各*Scene*のクラスは，抽象クラス[AbstractScene](#abstractscene)を継承しているため，メンバ変数**sceneStack**の型はスマートポインタです．**AbstractScene**の関数**onSceneChanged**はインターフェースクラス（純粋仮想関数を含むクラス）[IOnSceneChangedListener](https://github.com/alain0077/study_c/blob/master/c%2B%2B/Game/shoot-gaming/IOnSceneChangedListener.h)のメンバ関数で，本クラスでオーバーライドしている．コンストラクタで受けっとっている引数で見られる型eSceneは，[こちら](https://github.com/alain0077/study_c/blob/master/c%2B%2B/Game/shoot-gaming/eScene.h)で定義されている列挙型である．
+ゲームのそれぞれの*Scene*を管理するクラス．関数**onSceneChanged**によって*Scene*の切り替えを行う．作成した*Scene*はメンバ変数**sceneStack**にスタックしていく．各*Scene*のクラスは，抽象クラス[AbstractScene](#abstractscene)を継承しているため，メンバ変数**sceneStack**の型は**AbstractScene**型のスマートポインタです．**AbstractScene**の関数**onSceneChanged**はインターフェースクラス（純粋仮想関数を含むクラス）[IOnSceneChangedListener](https://github.com/alain0077/study_c/blob/master/c%2B%2B/Game/shoot-gaming/IOnSceneChangedListener.h)のメンバ関数で，本クラスでオーバーライドしている．コンストラクタで受けっとっている引数で見られる型eSceneは，[こちら](https://github.com/alain0077/study_c/blob/master/c%2B%2B/Game/shoot-gaming/eScene.h)で定義されている列挙型である．
 
 ## AbstractScene
 [ヘッダ](https://github.com/alain0077/study_c/blob/master/c%2B%2B/Game/shoot-gaming/AbstractScene.h), [ソース](https://github.com/alain0077/study_c/blob/master/c%2B%2B/Game/shoot-gaming/AbstractScene.cpp)
@@ -162,3 +162,5 @@ https://github.com/alain0077/study_c/blob/master/c%2B%2B/Game/shoot-gaming/Shoot
 - [プログラミング入門サイト](https://bituse.info/game/shot/)
 
 - [cpprefjp - C++日本語リファレンス](https://cpprefjp.github.io/)
+
+- [GoFのデザインパターンまとめ](https://qiita.com/i-tanaka730/items/c63c6c22abd1477e0ba0)

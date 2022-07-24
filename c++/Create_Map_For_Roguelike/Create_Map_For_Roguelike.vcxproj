@@ -154,14 +154,12 @@
     <ClCompile Include="AbstractMethod.cpp" />
     <ClCompile Include="AreaDivisionMethod.cpp" />
     <ClCompile Include="Define.cpp" />
-    <ClCompile Include="Looper.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractMethod.h" />
     <ClInclude Include="AreaDivisionMethod.h" />
     <ClInclude Include="Define.h" />
-    <ClInclude Include="Looper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

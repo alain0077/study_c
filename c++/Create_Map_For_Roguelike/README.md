@@ -14,25 +14,26 @@
 
 1. マップ全体を壁で埋める．
 
-<img src="https://github.com/alain0077/study_c/blob/images/c%2B%2B/Create_Map_For_Roguelike/algorithm1.png" width="320px" alt="Algorithm 1" title="Algorithm 1">
+    <img src="https://github.com/alain0077/study_c/blob/images/c%2B%2B/Create_Map_For_Roguelike/algorithm1.png" width="320px" alt="Algorithm 1" title="Algorithm 1">
 
 1. 縦か横にラインを引いて2分割する．
 
-<img src="https://github.com/alain0077/study_c/blob/images/c%2B%2B/Create_Map_For_Roguelike/algorithm2.png" width="320px" alt="Algorithm 2" title="Algorithm 2">
+    <img src="https://github.com/alain0077/study_c/blob/images/c%2B%2B/Create_Map_For_Roguelike/algorithm2.png" width="320px" alt="Algorithm 2" title="Algorithm 2">
 
 1. 分けたエリア内に収まる部屋を作成．
 
-<img src="https://github.com/alain0077/study_c/blob/images/c%2B%2B/Create_Map_For_Roguelike/algorithm3.png" width="320px" alt="Algorithm 3" title="Algorithm 3">
+    <img src="https://github.com/alain0077/study_c/blob/images/c%2B%2B/Create_Map_For_Roguelike/algorithm3.png" width="320px" alt="Algorithm 3" title="Algorithm 3">
 
 1. 部屋から境界まで通路を伸ばす．
 
-<img src="https://github.com/alain0077/study_c/blob/images/c%2B%2B/Create_Map_For_Roguelike/algorithm4.png" width="320px" alt="Algorithm 4" title="Algorithm 4">
+    <img src="https://github.com/alain0077/study_c/blob/images/c%2B%2B/Create_Map_For_Roguelike/algorithm4.png" width="320px" alt="Algorithm 4" title="Algorithm 4">
 
 1. 境界上の通路を繋げば，マップ完成！
 
-<img src="https://github.com/alain0077/study_c/blob/images/c%2B%2B/Create_Map_For_Roguelike/algorithm5.png" width="320px" alt="Algorithm 5" title="Algorithm 5">
+    <img src="https://github.com/alain0077/study_c/blob/images/c%2B%2B/Create_Map_For_Roguelike/algorithm5.png" width="320px" alt="Algorithm 5" title="Algorithm 5">
 
 ラインを引く位置をランダムにしてやれば，実行毎に違うマップを作成できるはず…
+
 
 
 

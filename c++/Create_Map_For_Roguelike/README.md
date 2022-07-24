@@ -13,7 +13,7 @@
 実装方針の一例として，
 
 1. マップ全体を壁で埋める．
-<img src="https://github.com/alain0077/study_c/tree/images/c++/Create_Map_For_Roguelike/algorithm1.png" width="320px">
+<img src="https://github.com/alain0077/study_c/blob/images/c%2B%2B/Create_Map_For_Roguelike/algorithm1.png" width="320px">
 1. 縦か横にラインを引いて2分割する．
 1. 分けたエリア内に収まる部屋を作成．
 1. 部屋から境界まで通路を伸ばす．
